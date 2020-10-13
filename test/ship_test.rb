@@ -7,6 +7,4 @@ class ShipTest < Minitest::Test
     ship = Ship.new("cruiser", 3)
     assert_instance_of Ship, ship
   end
-
-
 end
