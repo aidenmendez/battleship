@@ -35,4 +35,9 @@ class CellTest < Minitest::Test
   def test_cell_fired_upon_false_by_default
     assert_equal false, @cell.fired_upon?
   end
+
+  def test_if_fire_upon_changes_fired_upon
+    @cell.fire_upon
+    assert_equal true, @cell.fired_upon?
+  end
 end
