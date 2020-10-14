@@ -22,4 +22,11 @@ class CellTest < Minitest::Test
   def test_cell_empty_by_default
     assert_equal true, @cell.empty?
   end
+
+  def test_can_place_ship_in_cell
+    assert_equal true, @cell.empty?
+    @cell.place_ship(@cruiser)
+    assert_equal "cruiser", @cell.ship.name
+    assert_equal false, @cell.empty?
+  end
 end
