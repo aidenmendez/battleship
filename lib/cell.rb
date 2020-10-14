@@ -21,8 +21,10 @@ class Cell
     fired_upon
   end
 
-# might add ship damage stuff here
+# if ship exists in cell & has not been hit in this cell, it calls ship.hit. This method returns true.
   def fire_upon
+    @ship.hit if ship != nil && fired_upon == false
+
     @fired_upon = true
   end
 
