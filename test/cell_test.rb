@@ -32,7 +32,7 @@ class CellTest < Minitest::Test
     assert_equal false, @cell_empty.empty?
   end
 
-  # def test_cell_fired_upon_false_by_default
-  #   assert_equal false, @cell.fired_upon?
-  # end
+  def test_cell_fired_upon_false_by_default
+    assert_equal false, @cell.fired_upon?
+  end
 end
