@@ -17,7 +17,7 @@ class CellTest < Minitest::Test
   end
 
   def test_attributes_exist
-    assert_equal nil, @cell_empty.ship
+    assert_nil @cell_empty.ship
     assert_equal "Z100", @cell_empty.coordinate
   end
 
