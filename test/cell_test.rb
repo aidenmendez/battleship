@@ -63,4 +63,10 @@ class CellTest < Minitest::Test
     assert_equal "X", @cell_2.render
   end
 
+  def test_render_returns_see_ship_correctly
+    assert_equal ".", @cell_2.render
+    see_ship = true
+    assert_equal "S", @cell_2.render(see_ship)
+  end
+
 end
