@@ -5,4 +5,9 @@ class Cell
     @ship = nil
     @coordinate = coordinate
   end
+
+# returns true if cell empty, otherwise false
+  def empty?
+    @ship == nil
+  end
 end
