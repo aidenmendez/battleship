@@ -8,8 +8,14 @@ class CellTest < Minitest::Test
   def setup
     @cell_empty = Cell.new("Z100")
     @cell = Cell.new("A1")
+    # render class cells use cell_1 & cell_2
+    @cell_1 = Cell.new("B4")
+    @cell_2 = Cell.new("C3")
+
     @cruiser = Ship.new("cruiser",3)
     @cell.place_ship(@cruiser)
+    @cell_2.place_ship(@cruiser)
+
   end
 
   def test_it_exists
@@ -40,4 +46,10 @@ class CellTest < Minitest::Test
     @cell.fire_upon
     assert_equal true, @cell.fired_upon?
   end
+
+  def test_render_returns_correctly
+    assert_equal ".", @cell_1.render
+  end
+
+
 end
