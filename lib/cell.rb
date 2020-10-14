@@ -28,4 +28,17 @@ class Cell
     @fired_upon = true
   end
 
+# returns display based on state of cell, if passed true CAN return S, but does not always
+  def render(see_ship = false)
+    display = "."
+    display = "S" if see_ship == true && ship
+    if fired_upon && ship
+      display = "H"
+      display = "X" if ship.sunk?
+    elsif fired_upon
+      display = "M"
+    end
+    display
+  end
+
 end
