@@ -47,12 +47,20 @@ class CellTest < Minitest::Test
     assert_equal true, @cell.fired_upon?
   end
 
-  def test_render_returns_correctly
+  def test_render_returns_miss_correctly
     assert_equal ".", @cell_1.render
     @cell_1.fire_upon
     assert_equal "M", @cell_1.render
   end
 
-
+  def test_render_returns_hit_correctly
+    assert_equal ".", @cell_2.render
+    @cell_2.fire_upon
+    assert_equal "H", @cell_2.render
+    # artificially damaging ship, this is not really allowed
+    @cell_2.ship.hit
+    @cell_2.ship.hit
+    assert_equal "X", @cell_2.render
+  end
 
 end
