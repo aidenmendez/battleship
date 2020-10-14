@@ -6,10 +6,10 @@ require "./lib/ship"
 
 class CellTest < Minitest::Test
   def setup
-    @cell.place_ship(@cruiser)
     @cell_empty = Cell.new("Z100")
     @cell = Cell.new("A1")
     @cruiser = Ship.new("cruiser",3)
+    @cell.place_ship(@cruiser)
   end
 
   def test_it_exists
@@ -18,7 +18,7 @@ class CellTest < Minitest::Test
 
   def test_attributes_exist
     assert_equal nil, @cell_empty.ship
-    assert_equal "A1", @cell_empty.coordinate
+    assert_equal "Z100", @cell_empty.coordinate
   end
 
   def test_cell_empty_by_default
@@ -26,10 +26,13 @@ class CellTest < Minitest::Test
   end
 
   def test_can_place_ship_in_cell
-    assert_equal true, @cell.empty?
-    assert_equal "cruiser", @cell.ship.name
-    assert_equal false, @cell.empty?
+    assert_equal true, @cell_empty.empty?
+    @cell_empty.place_ship(@cruiser)
+    assert_equal "cruiser", @cell_empty.ship.name
+    assert_equal false, @cell_empty.empty?
   end
 
-
+  # def test_cell_fired_upon_false_by_default
+  #   assert_equal false, @cell.fired_upon?
+  # end
 end
