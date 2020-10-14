@@ -49,7 +49,10 @@ class CellTest < Minitest::Test
 
   def test_render_returns_correctly
     assert_equal ".", @cell_1.render
+    @cell_1.fire_upon
+    assert_equal "M", @cell_1.render
   end
+
 
 
 end
