@@ -16,8 +16,14 @@ class Cell
     @ship = ship
   end
 
+# returns boolean
   def fired_upon?
     fired_upon
+  end
+
+# might add ship damage stuff here
+  def fire_upon
+    @fired_upon = true
   end
 
 end
