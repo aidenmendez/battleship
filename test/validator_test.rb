@@ -4,8 +4,13 @@ require "./lib/validator"
 
 class ValidatorTest < Minitest::Test 
     def test_it_exists
-        validator = Validator.new(["A1", "A2", "A3"], 3)
+        coordinates = ["A1", "A2", "A3"]
+        validator = Validator.new(coordinates, 3)
 
         assert_instance_of Validator, validator
+        assert_equal 3, validator.length
+        assert_equal coordinates, validator.coordinates
     end
+
+    
 end 
