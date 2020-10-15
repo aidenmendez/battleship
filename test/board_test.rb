@@ -2,10 +2,12 @@ require "Minitest/autorun"
 require "Minitest/pride"
 require "./lib/board"
 require "./lib/cell"
+require "./lib/ship"
 
 class BoardTest < Minitest::Test
   def setup
     @board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
   end
 
   def test_it_exists
@@ -26,5 +28,9 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_coordinate?("A5")
     assert_equal false, @board.valid_coordinate?("E1")
     assert_equal false, @board.valid_coordinate?("A22")
+  end
+
+  def test_valid_placement_method_exists
+    refute_nil @board.valid_placement?(@cruiser, ["A1", "A2"])
   end
 end
