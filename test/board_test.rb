@@ -13,7 +13,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_makes_cells
-    assert_instance_of Cell, @board.make_cell("a1")
+    assert_instance_of Hash, @board.cells
   end
 
 end
