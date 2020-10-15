@@ -16,4 +16,7 @@ class BoardTest < Minitest::Test
     assert_instance_of Hash, @board.cells
   end
 
+  def test_board_contains_all_cells
+    assert_equal 16, @board.cells.count
+  end
 end
