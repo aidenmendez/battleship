@@ -2,6 +2,10 @@
 
 #### 
 class Validator
+
+    def initialize(coordinates, length)
+
+    end 
     #Psuedo code:
     # 
     # letter_validator that takes a coord [] 
