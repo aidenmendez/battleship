@@ -21,5 +21,13 @@ class ValidatorTest < Minitest::Test
         assert_equal false, validator2.length?
     end 
 
+    def test_letter_validator_works
+        coordinates = ["A1", "A2", "A3"]
+        validator = Validator.new(coordinates, 3)
+        validator2 = Validator.new(coordinates, 2)
+
+        assert_equal "vertical", validator.validate_letters
+    end
+
     
 end 
