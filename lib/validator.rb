@@ -2,9 +2,11 @@
 
 #### 
 class Validator
-
+    attr_reader :coordinates, :length 
+    
     def initialize(coordinates, length)
-
+        @coordinates = coordinates
+        @length = length
     end 
     #Psuedo code:
     # 
