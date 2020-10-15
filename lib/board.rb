@@ -26,6 +26,8 @@ class Board
     cells.key?(coordinate.upcase)
   end
 
-
+  def valid_placement?(ship, coordinates)
+    true
+  end
 
 end
