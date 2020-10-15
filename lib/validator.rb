@@ -11,7 +11,7 @@ class Validator
 
     def length?()
         @length == @coordinates.length
-      end
+    end
     #Psuedo code:
     # 
     # letter_validator that takes a coord [] 
@@ -26,6 +26,37 @@ class Validator
     #           if same, :vertical
     #           if not same, :horizontal 
     # 
+    def in_range?(letters)
+        invalid_letters = 0
+        letter_range = ("A".."D").to_a           # this will be swapped to in order to upscale board
+
+        letters.each do |letter|
+            if !letter_range.include?(letter)
+                invalid_letters += 1
+            end 
+        end 
+
+        if invalid_letters > 0
+            false
+        else
+            true
+        end 
+    end
+
+    def validate_letters
+        letters = []
+        problems = 0
+        letters = @coordinates.each do |coordinate|
+            # coordinate is "A1"
+            letters << coordinate[0]
+        end 
+
+        if !in_range?(letters) 
+            problems += 1
+        end
+
+
+    end 
     # 
     # number_validator that takes a coord []
     #   number_validator extracts numbers into []
