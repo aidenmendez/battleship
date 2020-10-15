@@ -3,11 +3,15 @@
 #### 
 class Validator
     attr_reader :coordinates, :length 
-    
+
     def initialize(coordinates, length)
         @coordinates = coordinates
         @length = length
     end 
+
+    def length?()
+        @length == @coordinates.length
+      end
     #Psuedo code:
     # 
     # letter_validator that takes a coord [] 
