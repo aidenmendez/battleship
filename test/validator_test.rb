@@ -12,5 +12,12 @@ class ValidatorTest < Minitest::Test
         assert_equal coordinates, validator.coordinates
     end
 
+    def test_length_method
+        coordinates = ["A1", "A2", "A3"]
+        validator = Validator.new(coordinates, 3)
+
+        assert validator.length?
+    end 
+
     
 end 
