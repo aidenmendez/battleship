@@ -22,6 +22,10 @@ class Board
     }
   end
 
-  
+  def valid_coordinate?(coordinate)
+    cells.key?(coordinate.upcase)
+  end
+
+
 
 end
