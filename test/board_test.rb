@@ -19,4 +19,9 @@ class BoardTest < Minitest::Test
   def test_board_contains_all_cells
     assert_equal 16, @board.cells.count
   end
+
+  def test_it_validates_coordinate
+    assert_equal true, @board.valid_coordinate?("A1")
+    assert_equal true, @board.valid_coordinate?("d4")
+  end
 end
