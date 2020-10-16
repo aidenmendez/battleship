@@ -1,3 +1,5 @@
+require './lib/validator'
+
 class Board
   attr_reader :cells
 
@@ -27,6 +29,7 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
+    # validator.check_placement ()
     length?(ship, coordinates)
   end
 
