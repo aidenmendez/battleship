@@ -50,6 +50,4 @@ class ValidatorTest < Minitest::Test
     assert_equal true, validator.check_coords
     assert_equal false, validator2.check_coords
   end
-
-    
 end 
