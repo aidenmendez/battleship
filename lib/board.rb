@@ -29,13 +29,7 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    # validator.check_placement ()
-    length?(ship, coordinates)
+    validator = Validator.new(coordinates, ship.length)
+    validator.check_coords
   end
-
-  #======Validator methods======================
-  def length?(ship, coordinates)
-    ship.length == coordinates.length
-  end
-
 end

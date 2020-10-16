@@ -7,7 +7,7 @@ class Validator
   def initialize(coordinates, length)
     @coordinates = coordinates
     @length = length
-    @acceptable_coords = cells = [
+    @acceptable_coords = [
       "A1",
       "A2",
       "A3",
@@ -32,17 +32,24 @@ class Validator
   end
 
   def acceptable_coords?
-    thing_to_return = true
+    valid_coord_count = 0
     @coordinates.each do |coordinate|
-      if @acceptable_coords.include?(coordinate)
-      else
-      thing_to_return = false
-      end
+      valid_coord_count += 1 if @acceptable_coords.include?(coordinate)
     end
-    thing_to_return
+
+    valid_coord_count == @coordinates.length
+    
+    # thing_to_return = true
+    # @coordinates.each do |coordinate|
+    #   if @acceptable_coords.include?(coordinate)
+    #   else
+    #   thing_to_return = false
+    #   end
+    # end
+    # thing_to_return
   end
 
-  def validate_letters
+  def validate_lets
     letters = []
     
     @coordinates.each do |coordinate|
@@ -56,17 +63,20 @@ class Validator
 
     if letters.all? {|letter| letter == letters[0]}
       0
+      # :vertical
     elsif letters.uniq.length != letters.length
       2
+      # :nonconsecutive_letters     #more descriptive for error-handling/ debugging
     elsif letters.all?((letters[0])..(letters[0] + @length - 1))
-      require 'pry'; binding.pry
       1
+      # :horizontal
     else
       2
+      # :invalid_letters
     end
   end
 
-  def validate_numbers
+  def validate_nums
     numbers = []
 
     @coordinates.each do |coordinate|
@@ -80,13 +90,24 @@ class Validator
 
     if numbers.all? {|number| number == numbers[0]}
       0
+      # :horizontal
     elsif numbers.uniq.length != numbers.length
       2
+      # :nonconsecutive_numbers     # more descriptive for error handling/ debugging
     elsif numbers.all?((numbers[0]..(numbers[0] + @length - 1)))
       1
+      # :vertical
     else
       2
+      # :invalid_numbers
     end
+  end
+
+  def check_coords
+    length? && acceptable_coords? && (validate_lets + validate_nums <= 1)
+
+    # length? && acceptable_coords? && validate_nums == validate_lets
+
   end
 
     #Psuedo code:
@@ -117,14 +138,4 @@ class Validator
     #       check_coordinates
     #       check_unoccupied
     #       return true
-    # 
-    # 
-    
-
-
-
-
-
-
-
 end 
