@@ -11,6 +11,7 @@ class BoardTest < Minitest::Test
     @submarine = Ship.new("Submarine", 2)
     @coordinates1 = ["A1", "A2", "A3"]
     @coordinates2 = ["A1", "B1"]
+    @empty_board = "  1 2 3 4 \n" + "A . . . . \n" + "B . . . . \n" + "C . . . . \n" + "D . . . . \n"
   end
 
   def test_it_exists
@@ -47,4 +48,9 @@ class BoardTest < Minitest::Test
     assert_nil @board.place(@submarine, @coordinates1)
     assert_nil @board.place(@cruiser, @coordinates2)
   end
+
+  def test_board_renders_correctly
+    assert_equal @empty_board, @board.render
+  end
+
 end
