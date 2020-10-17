@@ -1,3 +1,5 @@
+require './lib/validator'
+
 class Board
   attr_reader :cells
 
@@ -20,19 +22,17 @@ class Board
       "D3" => Cell.new("D3"),
       "D4" => Cell.new("D4")
     }
+    @validator = Validator.new()
   end
 
   def valid_coordinate?(coordinate)
     cells.key?(coordinate.upcase)
+    # adding in empty checker to this method could look like:
+    # !cells[coordinate.upcase].ship 
   end
 
   def valid_placement?(ship, coordinates)
-    length?(ship, coordinates)
+    
+    @validator.check_coords(coordinates, ship.length)
   end
-
-  #======Validator methods======================
-  def length?(ship, coordinates)
-    ship.length == coordinates.length
-  end
-
 end
