@@ -22,6 +22,7 @@ class Board
       "D3" => Cell.new("D3"),
       "D4" => Cell.new("D4")
     }
+    @validator = Validator.new()
   end
 
   def valid_coordinate?(coordinate)
@@ -31,7 +32,7 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    validator = Validator.new(coordinates, ship.length)
-    validator.check_coords
+    
+    @validator.check_coords(coordinates, ship.length)
   end
 end
