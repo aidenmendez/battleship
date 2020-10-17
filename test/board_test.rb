@@ -12,6 +12,8 @@ class BoardTest < Minitest::Test
     @coordinates1 = ["A1", "A2", "A3"]
     @coordinates2 = ["A1", "B1"]
     @empty_board = "  1 2 3 4 \n" + "A . . . . \n" + "B . . . . \n" + "C . . . . \n" + "D . . . . \n"
+    @see_ships_board = "  1 2 3 4 \n" + "A S S S . \n" + "B . . . . \n" + "C . . . . \n" + "D . . . . \n"
+
   end
 
   def test_it_exists
@@ -51,6 +53,11 @@ class BoardTest < Minitest::Test
 
   def test_board_renders_correctly
     assert_equal @empty_board, @board.render
+  end
+
+  def test_board_renders_with_see_ships
+    @board.place(@cruiser, @coordinates1)
+    assert_equal @see_ships_board, @board.render(true)
   end
 
 end
