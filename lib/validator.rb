@@ -12,15 +12,8 @@ class Validator
   end
 
   # As of now, acceptable_coord? is redundant with the valid_coordinate? method in board.
-  def acceptable_coords?(coordinates, cells)
-    valid_coord = true
-    coordinates.each do |coordinate|
-      if !cells.key.include?(coordinate)
-        valid_coord = false
-      end 
-    end
-
-    valid_coord
+  def acceptable_coordinate?(coordinate, cells)
+    cells.key?(coordinate.upcase) && !cells[coordinate.upcase].ship 
   end
 
   # This helper method is passed an array of values, and checks whether the values are the same (0), or sequential (1). Otherwise it returns (2)
@@ -74,8 +67,14 @@ class Validator
     array_checker(numbers)
   end
 
-  def check_coords(coordinates, length)
-    length?(coordinates, length) && (validate_lets(coordinates) + validate_nums(coordinates) == 1)
+  def check_coords(coordinates, length, cells)
+    available = coordinates.all? do |coordinate|
+      acceptable_coordinate?(coordinate, cells)
+    end
+    
+    valid = length?(coordinates, length) && (validate_lets(coordinates) + validate_nums(coordinates) == 1)
+
+    available && valid
     # the validate methods return 1 if values are sequential, 0 if they are the same, and 2 if values are invalid. For valid coordinates, within letters and numbers one must always be the same, and the other sequential. Therefore they must always sum to 1. 
     # length? && acceptable_coords? && validate_nums == validate_lets
 
