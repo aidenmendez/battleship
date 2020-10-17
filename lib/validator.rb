@@ -41,7 +41,7 @@ class Validator
     valid_coord_count == @coordinates.length
   end
 
-  # This helper method is passed an array of values, and checks whether the values are the same, uniq, and sequential.
+  # This helper method is passed an array of values, and checks whether the values are the same (0), or sequential (1). Otherwise it returns (2)
   def array_checker(array)
     if array.all? {|char| char == array[0]}
       0
