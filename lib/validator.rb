@@ -31,6 +31,7 @@ class Validator
     @length == @coordinates.length
   end
 
+  # As of now, acceptable_coord? is redundant with the valid_coordinate? method in board.
   def acceptable_coords?
     valid_coord_count = 0
     @coordinates.each do |coordinate|
@@ -38,15 +39,6 @@ class Validator
     end
 
     valid_coord_count == @coordinates.length
-    
-    # thing_to_return = true
-    # @coordinates.each do |coordinate|
-    #   if @acceptable_coords.include?(coordinate)
-    #   else
-    #   thing_to_return = false
-    #   end
-    # end
-    # thing_to_return
   end
 
   # This helper method is passed an array of values, and checks whether the values are the same, uniq, and sequential.
@@ -101,8 +93,8 @@ class Validator
   end
 
   def check_coords
-    length? && acceptable_coords? && (validate_lets + validate_nums <= 1)
-
+    length? && (validate_lets + validate_nums == 1)
+    # the validate methods return 1 if values are sequential, 0 if they are the same, and 2 if values are invalid. For valid coordinates, within letters and numbers one must always be the same, and the other sequential. Therefore they must always sum to 1. 
     # length? && acceptable_coords? && validate_nums == validate_lets
 
   end
