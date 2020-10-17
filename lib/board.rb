@@ -26,6 +26,8 @@ class Board
 
   def valid_coordinate?(coordinate)
     cells.key?(coordinate.upcase)
+    # adding in empty checker to this method could look like:
+    # !cells[coordinate.upcase].ship 
   end
 
   def valid_placement?(ship, coordinates)
