@@ -2,79 +2,84 @@
 
 #### 
 class Validator
-    attr_reader :coordinates, :length 
 
-    def initialize(coordinates, length)
-        @coordinates = coordinates
-        @length = length
-        @acceptable_coords = cells = [
-            "A1",
-            "A2",
-            "A3",
-            "A4",
-            "B1",
-            "B2",
-            "B3",
-            "B4",
-            "C1",
-            "C2",
-            "C3",
-            "C4",
-            "D1",
-            "D2",
-            "D3",
-            "D4"
-          ]
-    end 
-
-    def length?()
-        @length == @coordinates.length
-    end
-
-    def acceptable_coords?
-        thing_to_return = true
-        @coordinates.each do |coordinate|
-          if @acceptable_coords.include?(coordinate)
-          else
-            thing_to_return = false
-          end
-        end
-        thing_to_return
-    end
-
-    def validate_letters
-        letters = []
+  def initialize()
     
-        @coordinates.each do |coordinate|
+  end 
+
+  def length?(coordinates, length)
+    length == coordinates.length
+  end
+
+  # As of now, acceptable_coord? is redundant with the valid_coordinate? method in board.
+  def acceptable_coords?(coordinates, cells)
+    valid_coord = true
+    coordinates.each do |coordinate|
+      if !cells.key.include?(coordinate)
+        valid_coord = false
+      end 
+    end
+
+    valid_coord
+  end
+
+  # This helper method is passed an array of values, and checks whether the values are the same (0), or sequential (1). Otherwise it returns (2)
+  def array_checker(array)
+    if array.all? {|char| char == array[0]}
+      0
+      # If the values of the array are all the same, return 0
+      # :vertical
+    elsif array.uniq.length != array.length
+      2
+      # If some but not all values are the same, return 2
+      # :nonconsecutive_letters     #more descriptive for error-handling/ debugging
+    elsif array.all?((array[0])..(array[0] + array.length - 1))
+      1
+      # If all values are unique and sequential return 1
+      # :horizontal
+    else
+      2
+      # :invalid_letters
+    end
+
+  end 
+
+  def validate_lets(coordinates)
+    letters = []
+    
+    coordinates.each do |coordinate|
           # coordinate is "A1"
-          letters << coordinate[0]
-        end
-        if letters.all? {|letter| letter == letters[0]}
-          "vertical"
-        elsif letters.all?((letters[0].ord)..(letters[0].ord + @length - 1))
-          "horizontal"
-        else
-          nil
-        end
-    
+      letters << coordinate[0]
     end
 
-    def validate_numbers
-        numbers = []
-    
-        @coordinates.each do |coordinate|
-          # coordinate is "A1"
-          numbers << coordinate.delete("A-Z")
-        end
-        if numbers.all? {|number| number == numbers[0]}
-          "horizontal"
-        elsif numbers.all?((numbers[0].to_i..(numbers[0].to_i + @length - 1)))
-          "vertical"
-        else
-          nil
-        end
-    
+    letters = letters.map do |let|
+      let.ord
     end
+
+    array_checker(letters)
+  end
+
+  def validate_nums(coordinates)
+    numbers = []
+
+    coordinates.each do |coordinate|
+      # coordinate is "A1"
+      numbers << coordinate.delete("A-Z")
+    end
+
+    numbers = numbers.map do |num|
+      num.to_i
+    end
+
+    array_checker(numbers)
+  end
+
+  def check_coords(coordinates, length)
+    length?(coordinates, length) && (validate_lets(coordinates) + validate_nums(coordinates) == 1)
+    # the validate methods return 1 if values are sequential, 0 if they are the same, and 2 if values are invalid. For valid coordinates, within letters and numbers one must always be the same, and the other sequential. Therefore they must always sum to 1. 
+    # length? && acceptable_coords? && validate_nums == validate_lets
+
+  end
 
     #Psuedo code:
     # 
@@ -90,51 +95,7 @@ class Validator
     #           if same, :vertical
     #           if not same, :horizontal 
     # 
-    # def in_range?(letters)
-    #     invalid_letters = 0
-    #     letter_range = ("A".."D").to_a           # this will be swapped to in order to upscale board
-
-    #     letters.each do |letter|
-    #         if !letter_range.include?(letter)
-    #             invalid_letters += 1
-    #         end 
-    #     end 
-
-    #     if invalid_letters > 0
-    #         false
-    #     else
-    #         true
-    #     end 
-    # end
-
-    # def validate_letters
-    #     letters = []
-    #     problems = 0
-    #     letters = @coordinates.each do |coordinate|
-    #         # coordinate is "A1"
-    #         letters << coordinate[0]
-    #     end 
-
-    #     if !in_range?(letters) 
-    #         problems += 1
-    #     end
-
-
-    # end 
-    # 
-    # number_validator that takes a coord []
-    #   number_validator extracts numbers into []
-    #       check range of number []
-    #       check numbers are all same or all incremental
-    #           if !same, check incremental by 1 only
-    #                   use each_cons()
-    #                   if arr[0].each_cons(arr.length) == arr
-    #                     return :horizontal = true
-    #       return a symbol, either :horizontal (same) or :vertical (incremental)
-    #           if same, :horizontal
-    #           if not same, :vertical
-    # 
-    # 
+    #     
     # 
     # check_coordinates method (user inputs are kosher)
     #   this method is used for coordinate validation, 
@@ -148,14 +109,4 @@ class Validator
     #       check_coordinates
     #       check_unoccupied
     #       return true
-    # 
-    # 
-    
-
-
-
-
-
-
-
 end 
