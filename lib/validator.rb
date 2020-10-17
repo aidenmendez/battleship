@@ -49,6 +49,27 @@ class Validator
     # thing_to_return
   end
 
+  # This helper method is passed an array of values, and checks whether the values are the same, uniq, and sequential.
+  def array_checker(array)
+    if array.all? {|char| char == array[0]}
+      0
+      # If the values of the array are all the same, return 0
+      # :vertical
+    elsif array.uniq.length != array.length
+      2
+      # If some but not all values are the same, return 2
+      # :nonconsecutive_letters     #more descriptive for error-handling/ debugging
+    elsif array.all?((array[0])..(array[0] + @length - 1))
+      1
+      # If all values are unique and sequential return 1
+      # :horizontal
+    else
+      2
+      # :invalid_letters
+    end
+
+  end 
+
   def validate_lets
     letters = []
     
@@ -61,19 +82,7 @@ class Validator
       let.ord
     end
 
-    if letters.all? {|letter| letter == letters[0]}
-      0
-      # :vertical
-    elsif letters.uniq.length != letters.length
-      2
-      # :nonconsecutive_letters     #more descriptive for error-handling/ debugging
-    elsif letters.all?((letters[0])..(letters[0] + @length - 1))
-      1
-      # :horizontal
-    else
-      2
-      # :invalid_letters
-    end
+    array_checker(letters)
   end
 
   def validate_nums
@@ -88,19 +97,7 @@ class Validator
       num.to_i
     end
 
-    if numbers.all? {|number| number == numbers[0]}
-      0
-      # :horizontal
-    elsif numbers.uniq.length != numbers.length
-      2
-      # :nonconsecutive_numbers     # more descriptive for error handling/ debugging
-    elsif numbers.all?((numbers[0]..(numbers[0] + @length - 1)))
-      1
-      # :vertical
-    else
-      2
-      # :invalid_numbers
-    end
+    array_checker(numbers)
   end
 
   def check_coords

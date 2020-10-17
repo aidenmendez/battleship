@@ -50,4 +50,14 @@ class ValidatorTest < Minitest::Test
     assert_equal true, validator.check_coords
     assert_equal false, validator2.check_coords
   end
+
+  def test_array_checker
+    coordinates = ["A1", "A2", "A3"]
+    validator = Validator.new(coordinates, 3)
+    
+    assert_equal 1, validator.array_checker([1, 2, 3])
+    assert_equal 0, validator.array_checker([1, 1, 1])
+    assert_equal 2, validator.array_checker([1, 1, 2])
+    assert_equal 2, validator.array_checker([1, 2, 4])
+  end 
 end 
