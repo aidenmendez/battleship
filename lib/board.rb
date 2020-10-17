@@ -47,12 +47,12 @@ class Board
     sorted_coordinates.each do |coordinate|
       next_coordinate = sorted_coordinates[(sorted_coordinates.find_index(coordinate) + 1)]
       if next_coordinate == nil
-        rendered_board += " #{@cells[coordinate].render} \n"
+        rendered_board += " #{@cells[coordinate].render(see_ships)} \n"
         break
       elsif coordinate[0] == next_coordinate[0]
-        rendered_board += " #{@cells[coordinate].render}"
+        rendered_board += " #{@cells[coordinate].render(see_ships)}"
       elsif coordinate[0] != next_coordinate[0] && next_coordinate[0] != nil
-        rendered_board += " #{@cells[coordinate].render} \n#{next_coordinate[0]}"
+        rendered_board += " #{@cells[coordinate].render(see_ships)} \n#{next_coordinate[0]}"
       end
     end
     
