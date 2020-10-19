@@ -14,8 +14,7 @@ class TestUser < Minitest::Test
   end
 
   def test_user_had_board_when_instantiated
-
+    assert_instance_of Board, @user.board
   end
-
 
 end
