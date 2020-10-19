@@ -10,4 +10,12 @@ class ComputerTest < Minitest::Test
 
     assert computer
   end 
+
+  def test_computer_can_make_random_coordinates
+    computer = Computer.new 
+    board = Board.new 
+
+    assert_instance_of Array, computer.random_coordinates(board, 3)
+
+  end 
 end 
