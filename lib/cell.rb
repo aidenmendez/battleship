@@ -41,4 +41,13 @@ class Cell
     display
   end
 
+  def fired_result
+    if render == "M"
+      "miss"
+    elsif render == "H"
+      "hit"
+    else 
+      "hit and sunk the ship"
+    end
+  end
 end
