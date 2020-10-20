@@ -39,6 +39,11 @@ class Controller
     show_main_menu
   end
 
+  def reset_boards
+    @user.board.reset_board
+    @computer.board.reset_board
+  end
+
   def game_over?
     game_over = false
     if !@computer.board.render(true).include?("S")
@@ -85,7 +90,6 @@ class Controller
   def display_shots(user_fires_at, computer_shot)
     puts "You shot at #{user_fires_at}. It was a #{@computer.shot_result(user_fires_at)}."
     puts "My shot on #{computer_shot} was a #{@user.shot_result(computer_shot)}."
-
   end
 
   def render_boards
@@ -100,9 +104,5 @@ class Controller
     computer_shot = random_shot
     @user.shot_at(computer_shot)
     display_shots(user_fires_at, computer_shot)
-  end
-
-  def reset_boards 
-
   end
 end
