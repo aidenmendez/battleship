@@ -38,4 +38,9 @@ class User
   def shot_result(coordinate)
     @board.cells[coordinate].fired_result
   end
+
+  def get_coordinate
+    puts "Your turn. Enter the coordinate for your shot:"
+    gets.chomp.upcase
+  end
 end

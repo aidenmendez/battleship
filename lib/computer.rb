@@ -29,7 +29,7 @@ class Computer
  
   def render_board
     puts "==============COMPUTER BOARD=============="
-    puts @board.render(true)
+    puts @board.render
   end 
 
   def shot_at(coordinate)
@@ -70,4 +70,8 @@ class Computer
 
     random_coordinates
   end 
+
+  def random_shot
+
+  end
 end 

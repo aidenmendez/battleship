@@ -54,13 +54,35 @@ class Controller
     puts "#{winner} won. Womp womp."
   end
 
-  def turn
-    
+  def user_shot
+    puts "Your turn. Enter the coordinate for your shot:"
+    shot = gets.chomp.upcase
+
+    until @computer.board.valid_coordinate?(shot)
+      if @computer.board.cells[shot].fired_upon?
+        puts "You already fired there. Numpty. Try again:"
+      else
+        puts "Please enter a valid coordinate:"
+      end
+      
+      shot = gets.chomp.upcase
+    end
+    shot
   end
+
+  def turn
+    @computer.render_board
+    @user.render_board
+    @computer.shot_at(user_shot)
+
+    @user.shot_at(some computer method)
+
+  end
+
   # Psuedo code for turns
-  # display boards from user perspective
-  # ask player for a valid coordinate
-  # puts and do player's shot from coordinate -> calls computer.method
+  # 
+  # 
+  # 
   # puts and do computer takes a shot (not rum, or .whiskey)
   # 
 end
