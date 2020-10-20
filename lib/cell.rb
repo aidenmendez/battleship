@@ -42,9 +42,10 @@ class Cell
   end
 
   def fired_result
-    if render == "M"
+    display = render()
+    if display == "M"
       "miss"
-    elsif render == "H"
+    elsif display == "H"
       "hit"
     else 
       "hit and sunk the ship"
