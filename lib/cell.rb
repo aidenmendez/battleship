@@ -1,3 +1,5 @@
+require "./lib/ship"
+
 class Cell
   attr_reader :ship, :coordinate, :fired_upon
 
@@ -7,7 +9,6 @@ class Cell
     @fired_upon = false
   end
 
-# returns true if cell empty, otherwise false
   def empty?
     @ship == nil
   end
@@ -16,19 +17,16 @@ class Cell
     @ship = ship
   end
 
-# returns boolean
   def fired_upon?
     fired_upon
   end
 
-# if ship exists in cell & has not been hit in this cell, it calls ship.hit. This method returns true.
   def fire_upon
     @ship.hit if ship != nil && fired_upon == false
 
     @fired_upon = true
   end
 
-# returns display based on state of cell, if passed true CAN return S, but does not always
   def render(see_ship = false)
     display = "."
     display = "S" if see_ship == true && ship
@@ -50,5 +48,13 @@ class Cell
     else 
       "hit and sunk the ship"
     end
+  end
+
+  def reset
+    if @ship
+      @ship.reset
+    end
+    @ship = nil 
+    @fired_upon = false
   end
 end

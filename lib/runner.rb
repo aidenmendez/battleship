@@ -1,8 +1,7 @@
-require './lib/main_menu'
-require './lib/cell'
+require './lib/controller'
 
 
-menu = MainMenu.new
-menu.show_main_menu
+game = Controller.new
+game.show_main_menu
 
 

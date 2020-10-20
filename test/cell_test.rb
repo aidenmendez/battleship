@@ -84,4 +84,10 @@ class CellTest < Minitest::Test
     assert_equal "hit and sunk the ship", cell_3.fired_result
   end 
 
+  def cell_can_reset
+    @cell.reset 
+
+    assert_nil @cell.ship 
+    assert_equal false, @cell.fired_upon
+  end
 end

@@ -27,7 +27,7 @@ class User
   end
 
   def render_board
-    puts "==============PLAYER BOARD=============="
+    puts "===============PLAYER BOARD==============="
     puts @board.render(true)
   end 
 
