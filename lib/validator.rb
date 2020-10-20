@@ -11,7 +11,6 @@ class Validator
     length == coordinates.length
   end
 
-  # As of now, acceptable_coord? is redundant with the valid_coordinate? method in board.
   def acceptable_coordinate?(coordinate, cells)
     cells.key?(coordinate.upcase) && !cells[coordinate.upcase].ship 
   end

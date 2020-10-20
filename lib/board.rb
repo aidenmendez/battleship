@@ -30,14 +30,19 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
+    # coordinate_place =  true
+    # coordinates.all? |coordinate|
+      # valid_coordinate?(coordinate)
+  # end
+  
+  # if coordinate_place
     @validator.check_coords(coordinates, ship.length, @cells) 
+    #end
   end
 
   def place(ship, coordinates)
-    if valid_placement?(ship, coordinates)
-      coordinates.each do |coordinate|
-        @cells[coordinate].place_ship(ship)
-      end
+    coordinates.each do |coordinate|
+      @cells[coordinate].place_ship(ship)
     end
   end
 

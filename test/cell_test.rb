@@ -2,7 +2,7 @@ require "minitest/autorun"
 require "minitest/pride"
 require "./lib/cell"
 require "./lib/ship"
-
+require "mocha/minitest"
 
 class CellTest < Minitest::Test
   def setup
@@ -68,5 +68,20 @@ class CellTest < Minitest::Test
     see_ship = true
     assert_equal "S", @cell_2.render(see_ship)
   end
+
+  def test_fired_result_is_correct
+    cell_3 = Cell.new("D4")
+    armed_row_boat = Ship.new("row_boat", 1)
+    cell_3.place_ship(armed_row_boat)
+
+    # require 'pry'; binding.pry 
+    @cell_1.fire_upon 
+    @cell.fire_upon 
+    cell_3.fire_upon
+
+    assert_equal "miss", @cell_1.fired_result
+    assert_equal "hit", @cell.fired_result
+    assert_equal "hit and sunk the ship", cell_3.fired_result
+  end 
 
 end
