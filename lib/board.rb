@@ -25,12 +25,17 @@ class Board
     @validator = Validator.new()
   end
 
-  def valid_coordinate?(coordinate)  
-    @validator.acceptable_coordinate?(coordinate, @cells)
+  def valid_coordinate?(coordinate)
+    cells.key?(coordinate.upcse) && cells[coordinate.upcase].empty?
+    # @validator.acceptable_coordinate?(coordinate, @cells)
   end
 
   def valid_placement?(ship, coordinates)
-    @validator.check_coords(coordinates, ship.length, @cells) 
+    valid = false
+    valid == true if coordinates.all? { |coord| valid_coordinate?(coord) }
+    if valid == true
+      @validator.check_coords(coordinates, ship.length, @cells) 
+    end
   end
 
   def place(ship, coordinates)
