@@ -26,17 +26,37 @@ class Controller
   end
 
   def start_game
-   puts "Game started!"
-  #  until game_over?
-    #   do_turn
-    # end
+    @computer.setup
+    @user.board.render(true)
+    @user.setup
+
+    until game_over?
+      turn
+    end
+
+    report_winner
+    show_main_menu
   end
 
   def game_over?
-    is_over = false
-    if user.
+    game_over = false
+    if @computer.board.render(true).!include?("S")
+      @winner = "You"
+      game_over = true
+    elsif @user.board.render(true).!include?("S")
+      @winner = "I"
+      game_over = true
+    end
+    game_over
   end
 
+  def report_winner
+    puts "#{winner} won. Womp womp."
+  end
+
+  def turn
+    
+  end
   # Psuedo code for turns
   # display boards from user perspective
   # ask player for a valid coordinate
