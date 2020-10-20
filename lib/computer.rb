@@ -27,6 +27,18 @@ class Computer
     coordinates
   end
  
+  def render_board
+    puts "==============COMPUTER BOARD=============="
+    puts @board.render(true)
+  end 
+
+  def shot_at(coordinate)
+    @board.cells[coordinate].fire_upon
+  end 
+
+  def shot_result(coordinate)
+    @board.cells[coordinate].fired_result
+  end
  
   # This method takes a board, and a number of coordinates, and randomly returns adjacent coordinates in an array
   def random_coordinates(board, number_coordinates)
