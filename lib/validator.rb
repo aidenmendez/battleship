@@ -4,7 +4,7 @@
 class Validator
 
   # This helper method is passed an array of values, and checks whether the values are the same (0), or sequential (1). Otherwise it returns (2)
-  def array_checker(array)
+  def array_increments_by(array)
     if array.all? {|char| char == array[0]}
       0
       # If the values of the array are all the same, return 0
@@ -31,7 +31,7 @@ class Validator
       let.ord
     end
 
-    array_checker(letters)
+    array_increments_by(letters)
   end
 
   def validate_nums(coordinates)
@@ -46,7 +46,7 @@ class Validator
       num.to_i
     end
 
-    array_checker(numbers)
+    array_increments_by(numbers)
   end
 
   def check_coords(coordinates, length)
