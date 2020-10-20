@@ -3,18 +3,6 @@
 #### 
 class Validator
 
-  # def initialize()
-    
-  # end 
-
-  # def length?(coordinates, length)
-  #   length == coordinates.length
-  # end
-
-  # def acceptable_coordinate?(coordinate, cells)
-  #   cells.key?(coordinate.upcase) && !cells[coordinate.upcase].ship 
-  # end
-
   # This helper method is passed an array of values, and checks whether the values are the same (0), or sequential (1). Otherwise it returns (2)
   def array_checker(array)
     if array.all? {|char| char == array[0]}
@@ -67,40 +55,4 @@ class Validator
 
     valid = (coordinates.length == length) && (valid_lets + valid_nums == 1)
   end
-
-
-    # the validate methods return 1 if values are sequential, 0 if they are the same, and 2 if values are invalid. 
-    # For valid coordinates, within letters and numbers one must always be the same, and the other sequential. 
-    # Therefore they must always sum to 1. 
-    # length? && acceptable_coords? && validate_nums == validate_lets
-
-
-    #Psuedo code:
-    # 
-    # letter_validator that takes a coord [] 
-    #    letter_validator extracts letters into []
-    #       check range of letter []
-    #       check letters are all same or all incremental
-    #           if !same, check incremental by 1 only
-    #                   use each_cons()
-    #                   if arr[0].each_cons(arr.length) == arr
-    #                     return :horizontal = true
-    #       return a symbol, either :horizontal (incremental) or :vertical (same)
-    #           if same, :vertical
-    #           if not same, :horizontal 
-    # 
-    #     
-    # 
-    # check_coordinates method (user inputs are kosher)
-    #   this method is used for coordinate validation, 
-    #       length? 
-    #       letter_validator
-    #       number_validator
-    #       
-    # 
-    # check_placement method (check ships can be placed)
-    #   this method is used to verify a ship can be placed in the given coords.
-    #       check_coordinates
-    #       check_unoccupied
-    #       return true
 end 
