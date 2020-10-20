@@ -5,10 +5,10 @@ class Board
 
   def initialize()
     @cells = {
-      "A1" => Cell.new("a1"),
-      "A2" => Cell.new("a2"),
-      "A3" => Cell.new("a3"),
-      "A4" => Cell.new("a4"),
+      "A1" => Cell.new("A1"),
+      "A2" => Cell.new("A2"),
+      "A3" => Cell.new("A3"),
+      "A4" => Cell.new("A4"),
       "B1" => Cell.new("B1"),
       "B2" => Cell.new("B2"),
       "B3" => Cell.new("B3"),
