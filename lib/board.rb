@@ -27,12 +27,11 @@ class Board
 
   def valid_coordinate?(coordinate)
     cells.key?(coordinate.upcase) && cells[coordinate.upcase].empty?
-    # @validator.acceptable_coordinate?(coordinate, @cells)
   end
 
   def valid_placement?(ship, coordinates)
     if coordinates.all? { |coord| valid_coordinate?(coord) }
-      @validator.check_coords(coordinates, ship.length, @cells) 
+      @validator.check_coords(coordinates, ship.length) 
     else
       false
     end
@@ -59,8 +58,6 @@ class Board
       end
     end
     
-    # require 'pry'; binding.pry
     rendered_board
-
   end
 end
