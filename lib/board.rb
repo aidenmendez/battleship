@@ -64,4 +64,10 @@ class Board
     
     rendered_board
   end
+
+  def reset_board 
+    @cells.each do |cell, cell_value|
+      cell_value.reset
+    end
+  end
 end
