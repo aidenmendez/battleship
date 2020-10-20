@@ -1,7 +1,33 @@
 require "./lib/board"
+require "./lib/ship"
 
 class Computer
+  attr_reader :board, :ships
 
+  def initialize()
+    @board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
+    @ships = [@cruiser, @submarine]
+  end
+
+  def setup
+    coordinates = []
+    ships.each do |ship|
+      coordinates = random_coordinates( @board, ship.length)
+
+      until board.valid_placement?(ship, coordinates) do
+        coordinates = random_coordinates( @board, ship.length)
+      end
+
+      board.place(ship, coordinates)
+    end
+
+    puts "I have laid out my ships on the grid.\n You now need to lay out your two ships.\n The Cruiser is three units long and the Submarine is two units long."
+    coordinates
+  end
+ 
+ 
   # This method takes a board, and a number of coordinates, and randomly returns valid adjacent coordinates in an array
   def random_coordinates(board, number_coordinates)
     last_square = board.cells.keys.sort[-1]
