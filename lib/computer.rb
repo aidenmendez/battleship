@@ -28,7 +28,7 @@ class Computer
   end
  
  
-  # This method takes a board, and a number of coordinates, and randomly returns valid adjacent coordinates in an array
+  # This method takes a board, and a number of coordinates, and randomly returns adjacent coordinates in an array
   def random_coordinates(board, number_coordinates)
     last_square = board.cells.keys.sort[-1]
     max_letter = last_square[0]
