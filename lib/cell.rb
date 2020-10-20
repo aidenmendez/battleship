@@ -51,4 +51,9 @@ class Cell
       "hit and sunk the ship"
     end
   end
+
+  def reset
+    @ship = nil 
+    @fired_upon = false
+  end
 end
