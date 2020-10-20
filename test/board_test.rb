@@ -59,10 +59,10 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_can_reset_board
-    board2 = Board.new
     @board.place(@cruiser, @coordinates1)
     @board.reset_board
-  
-    assert_equal board2, @board
+
+    assert_nil @board.cells["A1"].ship
+    assert_equal false, @board.cells["A1"].fired_upon
   end 
 end
