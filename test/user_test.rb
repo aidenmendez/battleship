@@ -17,4 +17,22 @@ class TestUser < Minitest::Test
     @user.setup
     assert_instance_of Board, @user.board
   end
+
+  def test_shot_at_works
+    skip
+    # skipped due to cli
+    assert_equal false, @user.board.cells["A1"].fired_upon?
+    
+    @user.shot_at("A1")
+
+    assert @user.board.cells["A1"].fired_upon?
+  end 
+
+  def test_shot_result_works
+    skip
+    # skipped due to cli
+    @user.shot_at("A1")
+
+    assert_equal "miss", @user.shot_result("A1")
+  end 
 end
