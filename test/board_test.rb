@@ -58,4 +58,11 @@ class BoardTest < Minitest::Test
     assert_equal @see_ships_board, @board.render(true)
   end
 
+  def test_it_can_reset_board
+    board2 = Board.new
+    @board.place(@cruiser, @coordinates1)
+    @board.reset_board
+  
+    assert_equal board2, @board
+  end 
 end
