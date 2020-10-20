@@ -29,6 +29,10 @@ class Board
     cells.key?(coordinate.upcase) && cells[coordinate.upcase].empty?
   end
 
+  def valid_shot?(coordinate)
+    cells.key?(coordinate.upcase)
+  end
+
   def valid_placement?(ship, coordinates)
     if coordinates.all? { |coord| valid_coordinate?(coord) }
       @validator.check_coords(coordinates, ship.length) 
