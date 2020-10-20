@@ -53,6 +53,7 @@ class Cell
   end
 
   def reset
+    @ship.reset
     @ship = nil 
     @fired_upon = false
   end
