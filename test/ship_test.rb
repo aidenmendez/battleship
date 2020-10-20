@@ -37,4 +37,14 @@ class ShipTest < Minitest::Test
     
     assert_equal true, @cruiser.sunk?
   end
+
+  def test_ship_can_reset
+    2.times do
+      @cruiser.hit
+    end
+
+    @cruiser.reset
+
+    assert_equal 3, @cruiser.health
+  end 
 end
