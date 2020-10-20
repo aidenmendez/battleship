@@ -47,8 +47,6 @@ class BoardTest < Minitest::Test
 
   def test_placement_method_works_zzz
     assert @board.place(@cruiser, @coordinates1)
-    assert_nil @board.place(@submarine, @coordinates1)
-    assert_nil @board.place(@cruiser, @coordinates2)
   end
 
   def test_board_renders_correctly
