@@ -36,6 +36,7 @@ class Cell
     elsif fired_upon
       display = "M"
     end
+    
     display
   end
 
@@ -54,6 +55,7 @@ class Cell
     if @ship
       @ship.reset
     end
+
     @ship = nil 
     @fired_upon = false
   end

@@ -4,6 +4,7 @@ require "./lib/computer"
 require "./lib/board"
 require "./lib/cell"
 require "./lib/validator"
+require "mocha/minitest"
 
 class ComputerTest < Minitest::Test 
   def test_computer_has_board_when_instantiated
@@ -35,8 +36,9 @@ class ComputerTest < Minitest::Test
 
   def test_shot_at_works
     skip
-    # skipped due to cli
-    assert_equal false, @user.board.cells["A1"].fired_upon?
+    controller = mock
+    controller.stubs(:coordinate).returns("A1")
+    assert_equal false, @user.board.cells[controller.coordinate].fired_upon?
     
     @user.shot_at("A1")
 
