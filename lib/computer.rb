@@ -40,38 +40,43 @@ class Computer
     @board.cells[coordinate].fired_result
   end
  
-  # This method takes a board, and a number of coordinates, and randomly returns adjacent coordinates in an array
-  def random_coordinates(board, number_coordinates)
-    last_square = board.cells.keys.sort[-1]
-    max_letter = last_square[0]
-    max_number = last_square[1..-1].to_i
+  def random_coordinates(number_coordinates)
+    max_letter = board.last_square[0]
+    max_number = board.last_square[1..-1].to_i
     horizontal_ship = [true, false].sample
-    random_coordinates = []
+    limiting_range = 1 - number_coordinates
 
     if horizontal_ship
-      starting_letter = rand(65..max_letter.ord).chr
-      starting_number = rand(1..(max_number + 1 - number_coordinates))
-
-      number_coordinates.times do 
-        random_coordinates << starting_letter + starting_number.to_s
-        starting_number += 1
-      end
-      
+      random_horizontal_ship(max_letter, max_number, limiting_range, number_coordinates)
     else
-      starting_letter = rand(65..max_letter.ord + 1 - number_coordinates).chr
-      starting_number = rand(1..max_number)
+      random_vertical_ship(max_letter, max_number, limiting_range, number_coordinates)
+    end
+  end 
 
-      number_coordinates.times do 
-        random_coordinates << starting_letter + starting_number.to_s
-        
-        starting_letter = (starting_letter.ord + 1).chr
-      end 
+  def random_horizontal_ship(max_letter, max_number, limiting_range, number_coordinates)
+    random_coordinates = []
+    starting_letter = rand(65..max_letter.ord).chr
+    starting_number = rand(1..(max_number + limiting_range))
+
+    number_coordinates.times do 
+      random_coordinates << starting_letter + starting_number.to_s
+      starting_number += 1
     end
 
     random_coordinates
-  end 
+  end
 
-  def random_shot
+  def random_vertical_ship(max_letter, max_number, limiting_range, number_coordinates)
+    random_coordinates = []
 
+    starting_letter = rand(65..max_letter.ord + limiting_range).chr
+    starting_number = rand(1..max_number)
+
+    number_coordinates.times do 
+      random_coordinates << starting_letter + starting_number.to_s
+      starting_letter = (starting_letter.ord + 1).chr
+    end 
+
+    random_coordinates
   end
 end 

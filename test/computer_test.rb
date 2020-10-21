@@ -4,11 +4,12 @@ require "./lib/computer"
 require "./lib/board"
 require "./lib/cell"
 require "./lib/validator"
+require "mocha/minitest"
 
 class ComputerTest < Minitest::Test 
   def test_computer_has_board_when_instantiated
-    @user.setup
-    assert_instance_of Board, @user.board
+    computer = Computer.new
+    assert_instance_of Board, computer.board
   end
   
   def test_computer_exists
@@ -21,9 +22,21 @@ class ComputerTest < Minitest::Test
     computer = Computer.new 
     board = Board.new 
 
-    assert_instance_of Array, computer.random_coordinates(board, 3)
-    assert_equal 3, computer.random_coordinates(board, 3).length
+    assert_instance_of Array, computer.random_coordinates(3)
+    assert_equal 3, computer.random_coordinates(3).length
   end 
+
+  def test_random_horizontal_and_vertical_ship
+    computer = Computer.new
+    number_coordinates = 3
+    max_letter = computer.board.last_square[0]
+    max_number = computer.board.last_square[1..-1].to_i
+    horizontal_ship = [true, false].sample
+    limiting_range = 1 - number_coordinates
+
+    assert_instance_of Array, computer.random_horizontal_ship(max_letter, max_number, limiting_range, number_coordinates)
+    assert_equal 3, computer.random_vertical_ship(max_letter, max_number, limiting_range, number_coordinates).length
+  end
 
   # def test_can_setup
   #   computer = Computer.new
@@ -35,8 +48,9 @@ class ComputerTest < Minitest::Test
 
   def test_shot_at_works
     skip
-    # skipped due to cli
-    assert_equal false, @user.board.cells["A1"].fired_upon?
+    controller = mock
+    controller.stubs(:coordinate).returns("A1")
+    assert_equal false, @user.board.cells[controller.coordinate].fired_upon?
     
     @user.shot_at("A1")
 
