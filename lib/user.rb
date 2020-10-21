@@ -5,11 +5,9 @@ require "./lib/ship"
 class User
   attr_reader :board, :ships
 
-  def initialize()
+  def initialize(ships)
     @board = Board.new
-    @cruiser = Ship.new("Cruiser", 3)
-    @submarine = Ship.new("Submarine", 2)
-    @ships = [@cruiser, @submarine]
+    @ships = ships
   end
 
   def setup

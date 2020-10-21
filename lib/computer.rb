@@ -4,27 +4,35 @@ require "./lib/ship"
 class Computer
   attr_reader :board, :ships
 
-  def initialize()
+  def initialize(ships)
     @board = Board.new
-    @cruiser = Ship.new("Cruiser", 3)
-    @submarine = Ship.new("Submarine", 2)
-    @ships = [@cruiser, @submarine]
+    @ships = ships
   end
 
   def setup
     coordinates = []
     ships.each do |ship|
-      coordinates = random_coordinates( @board, ship.length)
+      coordinates = random_coordinates(ship.length)
 
       until board.valid_placement?(ship, coordinates) do
-        coordinates = random_coordinates( @board, ship.length)
+        coordinates = random_coordinates(ship.length)
       end
 
       @board.place(ship, coordinates)
     end
 
-    puts "I have laid out my ships on the grid.\n You now need to lay out your two ships.\n The Cruiser is three units long and the Submarine is two units long."
+    print_ship_stats
+
     coordinates
+  end
+
+  def print_ship_stats
+    puts "I have laid out my ships on the grid."
+    puts "You now need to lay out your #{ships.length} ship(s)." 
+    
+    ships.each do |ship|
+      puts "The #{ship.name.capitalize} is #{ship.length} units long."
+    end
   end
  
   def render_board
