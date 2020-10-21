@@ -1,7 +1,7 @@
 require './lib/validator'
 
 class Board
-  attr_reader :cells
+  attr_reader :cells, :last_square
 
   def initialize()
     @cells = {
@@ -23,6 +23,7 @@ class Board
       "D4" => Cell.new("D4")
     }
     @validator = Validator.new()
+    @last_square = cells.keys.sort[-1]
   end
 
   def valid_coordinate?(coordinate)
